@@ -59,10 +59,10 @@ terminalInput.addEventListener('keydown', function(event) {
             if (cmdIndex > 0) {
                 cmdIndex--;
                 terminalInput.value = cmdHistory[cmdIndex];
-                setTimeout(() => {
-                    terminalInput.selectionStart = terminalInput.selectionEnd = cmdHistory[cmdIndex].length;
-                }, 0);
             }
+            setTimeout(() => {
+                terminalInput.selectionStart = terminalInput.selectionEnd = cmdHistory[cmdIndex].length;
+            }, 0);
             break;
         case 'ArrowDown':
             if (cmdIndex < cmdHistory.length - 1) {
