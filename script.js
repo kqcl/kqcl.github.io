@@ -1,8 +1,9 @@
 const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
-const terminalPrompt = document.getElementById('terminal-prompt');
 
 const cmdHistory = [];
+let cmdIndex = 0;
+
 
 function scrollToBottom() {
     document.querySelectorAll('.terminal-body')[0].scrollIntoView(false);
@@ -36,18 +37,41 @@ function handleCommand(command) {
         case 'su':
             handleSudo();
             break;
+        case 'time':
+            displayDateTime();
+            break;
         default:
             displayErrorMessage();
     }
 }
 
 terminalInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        const command = terminalInput.value.trim().toLowerCase();
-        printMessage(`${terminalPrompt.textContent} ${command}`);
-        terminalInput.value = '';
-        handleCommand(command);
-        scrollToBottom();
+    switch (event.key) {
+        case 'Enter':
+            const command = terminalInput.value.trim().toLowerCase();
+            printMessage(`<span style="color: orange">visitor</span><span class="glow">@</span>kqcl<span style="color: lightgreen;"> ➜</span> <span style="color: lightblue;">~</span> $ ${command}`);
+            terminalInput.value = '';
+            handleCommand(command);
+            cmdIndex = cmdHistory.length; 
+            scrollToBottom();
+            break;
+        case 'ArrowUp':
+            if (cmdIndex > 0) {
+                cmdIndex--;
+                terminalInput.value = cmdHistory[cmdIndex];
+                setTimeout(() => {
+                    terminalInput.selectionStart = terminalInput.selectionEnd = cmdHistory[cmdIndex].length;
+                }, 0);
+            }
+            break;
+        case 'ArrowDown':
+            if (cmdIndex < cmdHistory.length - 1) {
+                cmdIndex++;
+                terminalInput.value = cmdHistory[cmdIndex];
+            } else {
+                terminalInput.value = '';
+            }
+            break;
     }
 });
 
@@ -74,6 +98,7 @@ function displayHelp() {
             <li><span class="glow">help</span> = If you are reading this you already know what this command does :)</li>
             <li><span class="glow">clear</span> = Clear the terminal</li>
             <li><span class="glow">history</span> = Show your recently used commands</li>
+            <li><span class="glow">time</span> = Display the current date and time</li>
             <li><span class="glow">su</span> = Switch to superuser (only use it if you have root privileges)</li>
         </ul>
     `;
@@ -116,9 +141,16 @@ function displayIp() {
 
 function handleSudo() {
     printMessage("<p>I told you not to run this unless you're an admin qwq</p>")
-    window.location.replace("https://www.youtube.com/watch?v=ALiLGgn3YGM");
+    setTimeout(() => {
+        window.location.replace("https://www.youtube.com/watch?v=ALiLGgn3YGM");
+    }, 1500);
+}
+
+function displayDateTime() {
+    const currentDate = new Date();
+    printMessage(`${currentDate.toLocaleString()}`);
 }
 
 function displayErrorMessage() {
-    printMessage("Error: Command not found. Type 'help' for a list of available commands.");
+    printMessage(`Error: Command not found. Type <span class="glow">'help'</span> for a list of available commands.`);
 }
