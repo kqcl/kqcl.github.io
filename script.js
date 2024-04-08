@@ -1,7 +1,7 @@
 const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
 
-const spotify_url = 'http://185.234.69.13:3046';
+const spotify_url = 'https://kqcl.tech:3127';
 
 const cmdHistory = [];
 let cmdIndex = 0;
