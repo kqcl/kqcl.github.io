@@ -113,7 +113,7 @@ function displayHelp() {
 function displayAboutMe() {
     const whoisMessage = `
         <p>Hey :3<br>
-        I am a random kid from germany who likes to code in his free time, really loves cats, is pretty socially awkward and yes :)<br>
+        I am a random kid from germany who likes to code in his free time, really loves cats and yeah :)<br>
         I'm quite familiar with <span class="yellow">TypeScript</span> and <span class="yellow">Python</span>, know quite a bit of <span class=yellow>swift</span> and am currently learning <span class="yellow">Rust</span> (I kind of love it alr);<br>
         My tooling consist of an arch linux machine and neovim - the dotfiles are on my github if anyone cares.<br>
         You can always write me a dm via discord <span class="glow">@kqcl</span> - I'm always happy to have someone to talk to xD<br>
