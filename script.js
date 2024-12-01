@@ -43,7 +43,8 @@ function handleCommand(command) {
             displayDateTime();
             break;
         case 'spotify':
-            displaySpotify();
+            printMessage("<p>sorry, my vps is down atm so this cmd isn't available pwp</p>")
+            //displaySpotify();
             break;
         default:
             displayErrorMessage();
@@ -112,12 +113,13 @@ function displayHelp() {
 
 function displayAboutMe() {
     const whoisMessage = `
-        <p>Hey :3<br>
-        I am a random kid from germany who likes to code in his free time, really loves cats and yeah :)<br>
-        I'm quite familiar with <span class="yellow">TypeScript</span> and <span class="yellow">Python</span>, know quite a bit of <span class=yellow>swift</span> and am currently learning <span class="yellow">Rust</span> (I kind of love it alr);<br>
-        My tooling consist of an arch linux machine and neovim - the dotfiles are on my github if anyone cares.<br>
-        You can always write me a dm via discord <span class="glow">@kqcl</span> - I'm always happy to have someone to talk to xD<br>
-        Well, yea - that's pretty much it - nom nom out :D
+        <p>haiiiii :3333<br>
+        i'm just some girl from germany who's interested cs, currently in high school :3<br>
+        i'm quite familiar with ts & py, did a little rust and swift and am now mainly focussing on go (love the lang)<br>
+        i'm a huge vim fan - spent wayy too much time on my neovim config - dotfiles are somewhere in my repos btww<br>
+        on the off-chance you would wanna chat, just add me on dc (@kqcl) - always happy to have someone to talk to<br>
+        im a huge reading fan, nothing beats a good book (maybe cats but that's it) - also life without music would be pointless ngl<br>
+        anywaysss - if you've read this far, tyy and have a nice dayy - you're awesome <3333
     `;
     printMessage(whoisMessage);
 } 
