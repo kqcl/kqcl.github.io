@@ -1,7 +1,7 @@
 const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
 
-const spotify_url = 'https://nyaw.me/api/';
+const spotify_url = 'https://nyaw.me/api';
 
 const cmdHistory = [];
 let cmdIndex = 0;
@@ -165,7 +165,10 @@ async function fetchCurrentlyPlaying() {
         }
         const data = await response.json(); 
         return data; 
-    } catch (error) {}
+    } catch (error) {
+        console.log('An Error occurred: ' + error.message);
+        return null;
+    }
 }
 
 async function fetchLastListenedSong() {
@@ -185,26 +188,27 @@ async function displaySpotify() {
         printMessage('Fetching currently playing song...');
         const data = await fetchCurrentlyPlaying();
 
-        if (data.item) {
+        if (data) {
             const message = `
                 <p>Currently playing:</p>
                 <ul>
-                    <li>Name: ${data.item.name}</li>
-                    <li>Artist: ${data.item.artists[0].name}</li>
-                    <li>Album: ${data.item.album.name}</li>
-                    <li>Direct-Link: <a href="${data.item.external_urls.spotify}" target="_blank">${data.item.external_urls.spotify}</a></li>
+                    <li>Name: ${data.name}</li>
+                    <li>Artist: ${data.artist}</li>
+                    <li>Album: ${data.album}</li>
+                    <li>Direct-Link: <a href="${data.link}" target="_blank">${data.link}</a></li>
                 </ul>
             `;
             printMessage(message);
         } else {
             printMessage('I\'m not listening to anything right now, but the last track I listened to was:');
-            const lastListenedSong = await fetchLastListenedSong();
+            const data = await fetchLastListenedSong();
+            console.log(data);
             const message = `
                 <ul>
-                    <li>Name: ${lastListenedSong.name}</li>
-                    <li>Artist: ${lastListenedSong.artist}</li>
-                    <li>Album: ${lastListenedSong.album}</li>
-                    <li>Direct-Link: <a href="${lastListenedSong.direct_link}" target="_blank">${lastListenedSong.direct_link}</a></li>
+                    <li>Name: ${data.name}</li>
+                    <li>Artist: ${data.artist}</li>
+                    <li>Album: ${data.album}</li>
+                    <li>Direct-Link: <a href="${data.link}" target="_blank">${data.link}</a></li>
                 </ul>
             `;
             printMessage(message);
